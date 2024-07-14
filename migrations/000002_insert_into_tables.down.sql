@@ -1,0 +1,2 @@
+TRUNCATE TABLE kitchens;
+TRUNCATE TABLE users;
