@@ -181,3 +181,24 @@ func (u *UserRepo) Delete(ctx context.Context, id *pb.ID) error {
 
 	return nil
 }
+
+func (u *UserRepo) ValidateUser(ctx context.Context, id string) (bool, error) {
+	query := `
+    select EXISTS (
+		select 1
+		from users
+		where deleted_at is null and id = $1
+	)`
+
+	var status bool
+	err := u.DB.QueryRowContext(ctx, query, id).Scan(&status)
+	if err != nil {
+		return false, errors.Wrap(err, "validation failure")
+	}
+
+	if !status {
+		return false, errors.New("user not found")
+	}
+
+	return status, nil
+}

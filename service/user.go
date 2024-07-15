@@ -50,3 +50,12 @@ func (u *UserService) DeleteProfile(ctx context.Context, req *pb.ID) (*pb.Void, 
 
 	return &pb.Void{}, nil
 }
+
+func (u *UserService) ValidateUser(ctx context.Context, req *pb.ID) (*pb.Status, error) {
+	exists, err := u.Repo.ValidateUser(ctx, req.Id)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to validate user")
+	}
+
+	return &pb.Status{Exists: exists}, nil
+}

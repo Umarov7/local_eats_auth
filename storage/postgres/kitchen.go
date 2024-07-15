@@ -261,3 +261,24 @@ func (k *KitchenRepo) CountRows(ctx context.Context) (int, error) {
 
 	return rowsNum, nil
 }
+
+func (k *KitchenRepo) ValidateKitchen(ctx context.Context, id string) (bool, error) {
+	query := `
+    select EXISTS (
+		select 1
+		from kitchens
+		where deleted_at is null and id = $1
+	)`
+
+	var status bool
+	err := k.DB.QueryRowContext(ctx, query, id).Scan(&status)
+	if err != nil {
+		return false, errors.Wrap(err, "validation failure")
+	}
+
+	if !status {
+		return false, errors.New("kitchen not found")
+	}
+
+	return status, nil
+}

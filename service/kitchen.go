@@ -87,3 +87,12 @@ func (k *KitchenService) Search(ctx context.Context, req *pb.SearchDetails) (*pb
 		Limit:    req.Pagination.Limit,
 	}, nil
 }
+
+func (k *KitchenService) ValidateKitchen(ctx context.Context, req *pb.ID) (*pb.Status, error) {
+	exists, err := k.Repo.ValidateKitchen(ctx, req.Id)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to validate kitchen")
+	}
+
+	return &pb.Status{Exists: exists}, nil
+}
