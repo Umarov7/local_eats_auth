@@ -25,47 +25,72 @@ func NewKitchenService(db *sql.DB) *KitchenService {
 }
 
 func (k *KitchenService) Create(ctx context.Context, req *pb.CreateRequest) (*pb.CreateResponse, error) {
+	k.Logger.Info("CreateKitchen method is starting")
+
 	resp, err := k.Repo.Create(ctx, req)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to create kitchen")
+		er := errors.Wrap(err, "failed to create kitchen")
+		k.Logger.Error(er.Error())
+		return nil, er
 	}
 
+	k.Logger.Info("CreateKitchen has successfully finished")
 	return resp, nil
 }
 
 func (k *KitchenService) Get(ctx context.Context, req *pb.ID) (*pb.Info, error) {
+	k.Logger.Info("GetKitchen method is starting")
+
 	resp, err := k.Repo.Read(ctx, req)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to get kitchen")
+		er := errors.Wrap(err, "failed to get kitchen")
+		k.Logger.Error(er.Error())
+		return nil, er
 	}
 
+	k.Logger.Info("GetKitchen has successfully finished")
 	return resp, nil
 }
 
 func (k *KitchenService) Update(ctx context.Context, req *pb.NewData) (*pb.UpdatedData, error) {
+	k.Logger.Info("UpdateKitchen method is starting")
+
 	resp, err := k.Repo.Update(ctx, req)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to update kitchen")
+		er := errors.Wrap(err, "failed to update kitchen")
+		k.Logger.Error(er.Error())
+		return nil, er
 	}
 
+	k.Logger.Info("UpdateKitchen has successfully finished")
 	return resp, nil
 }
 
 func (k *KitchenService) Delete(ctx context.Context, req *pb.ID) (*pb.Void, error) {
+	k.Logger.Info("DeleteKitchen method is starting")
+
 	err := k.Repo.Delete(ctx, req)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to delete kitchen")
+		er := errors.Wrap(err, "failed to delete kitchen")
+		k.Logger.Error(er.Error())
+		return nil, er
 	}
 
+	k.Logger.Info("DeleteKitchen has successfully finished")
 	return &pb.Void{}, nil
 }
 
 func (k *KitchenService) Fetch(ctx context.Context, req *pb.Pagination) (*pb.Kitchens, error) {
+	k.Logger.Info("FetchKitchens method is starting")
+
 	resp, total, err := k.Repo.Fetch(ctx, req)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to fetch kitchens")
+		er := errors.Wrap(err, "failed to fetch kitchens")
+		k.Logger.Error(er.Error())
+		return nil, er
 	}
 
+	k.Logger.Info("FetchKitchens has successfully finished")
 	return &pb.Kitchens{
 		Kitchens: resp,
 		Total:    int32(total),
@@ -75,11 +100,16 @@ func (k *KitchenService) Fetch(ctx context.Context, req *pb.Pagination) (*pb.Kit
 }
 
 func (k *KitchenService) Search(ctx context.Context, req *pb.SearchDetails) (*pb.Kitchens, error) {
+	k.Logger.Info("SearchKitchen method is starting")
+
 	resp, total, err := k.Repo.Search(ctx, req)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to find kitchen")
+		er := errors.Wrap(err, "failed to find kitchen")
+		k.Logger.Error(er.Error())
+		return nil, er
 	}
 
+	k.Logger.Info("SearchKitchen has successfully finished")
 	return &pb.Kitchens{
 		Kitchens: resp,
 		Total:    int32(total),
@@ -89,10 +119,15 @@ func (k *KitchenService) Search(ctx context.Context, req *pb.SearchDetails) (*pb
 }
 
 func (k *KitchenService) ValidateKitchen(ctx context.Context, req *pb.ID) (*pb.Status, error) {
+	k.Logger.Info("ValidateKitchen method is starting")
+
 	exists, err := k.Repo.ValidateKitchen(ctx, req.Id)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to validate kitchen")
+		er := errors.Wrap(err, "failed to validate kitchen")
+		k.Logger.Error(er.Error())
+		return nil, er
 	}
 
+	k.Logger.Info("ValidateKitchen has successfully finished")
 	return &pb.Status{Exists: exists}, nil
 }
