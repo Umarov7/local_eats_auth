@@ -18,8 +18,8 @@ VALUES
 ('223e4567-e89b-12d3-a456-426614174003', '123e4567-e89b-12d3-a456-426614174003', 'Mediterranean Flavors', 'Serves Mediterranean cuisine.', 'Mediterranean', '789 Oak St, Anytown, USA', '+1122334455', 4.2, 150),
 ('223e4567-e89b-12d3-a456-426614174004', '123e4567-e89b-12d3-a456-426614174004', 'Sushi House', 'Offers a wide range of sushi.', 'Japanese', '101 Pine St, Anytown, USA', '+1357924680', 4.7, 280),
 ('223e4567-e89b-12d3-a456-426614174005', '123e4567-e89b-12d3-a456-426614174005', 'Pasta Paradise', 'Dedicated to Italian pasta dishes.', 'Italian', '222 Cedar St, Anytown, USA', '+1443322110', 4.3, 180),
-('223e4567-e89b-12d3-a456-426614174006', '123e4567-e89b-12d3-a456-426614174006', "Emily's Bakery", 'Known for exquisite cakes.', 'Bakery', '333 Maple St, Anytown, USA', '+1662777889', 4.9, 400),
-('223e4567-e89b-12d3-a456-426614174007', '123e4567-e89b-12d3-a456-426614174007', "Gordon's Fine Dining", 'Fine dining experience.', 'International', '444 Walnut St, Anytown, USA', '+1555099444', 4.6, 320),
-('223e4567-e89b-12d3-a456-426614174008', '123e4567-e89b-12d3-a456-426614174008', "Frank's BBQ Joint", 'Famous for smoked BBQ.', 'BBQ', '555 Pineapple St, Anytown, USA', '+1777000111', 4.4, 250),
+('223e4567-e89b-12d3-a456-426614174006', '123e4567-e89b-12d3-a456-426614174006', 'Emilys Bakery', 'Known for exquisite cakes.', 'Bakery', '333 Maple St, Anytown, USA', '+1662777889', 4.9, 400),
+('223e4567-e89b-12d3-a456-426614174007', '123e4567-e89b-12d3-a456-426614174007', 'Gordons Fine Dining', 'Fine dining experience.', 'International', '444 Walnut St, Anytown, USA', '+1555099444', 4.6, 320),
+('223e4567-e89b-12d3-a456-426614174008', '123e4567-e89b-12d3-a456-426614174008', 'Franks BBQ Joint', 'Famous for smoked BBQ.', 'BBQ', '555 Pineapple St, Anytown, USA', '+1777000111', 4.4, 250),
 ('223e4567-e89b-12d3-a456-426614174009', '123e4567-e89b-12d3-a456-426614174009', 'Green Leaf Cafe', 'Creative vegan dishes.', 'Vegan', '666 Orange St, Anytown, USA', '+1888999222', 4.1, 120),
 ('223e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174010', 'Wine & Dine', 'Offers a variety of wines.', 'Wine Bar', '777 Peach St, Anytown, USA', '+1999888777', 4.0, 100);

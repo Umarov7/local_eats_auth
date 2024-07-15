@@ -28,8 +28,8 @@ func (k *KitchenRepo) Create(ctx context.Context, data *pb.CreateRequest) (*pb.C
 		id, owner_id, name, description, cuisine_type, address, phone_number, rating, created_at
 	`
 
-	row := k.DB.QueryRowContext(ctx, query, data.OwnerId, data.Name,
-		data.Description, data.CuisineType, data.PhoneNumber)
+	row := k.DB.QueryRowContext(ctx, query, data.OwnerId, data.Name, data.Description,
+		data.CuisineType, data.Address, data.PhoneNumber)
 
 	var kn pb.CreateResponse
 
