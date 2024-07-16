@@ -131,3 +131,31 @@ func (k *KitchenService) ValidateKitchen(ctx context.Context, req *pb.ID) (*pb.S
 	k.Logger.Info("ValidateKitchen has successfully finished")
 	return &pb.Status{Exists: exists}, nil
 }
+
+func (k *KitchenService) IncrementTotalOrders(ctx context.Context, req *pb.ID) (*pb.Void, error) {
+	k.Logger.Info("IncrementTotalOrders method is starting")
+
+	err := k.Repo.IncrementTotalOrders(ctx, req.Id)
+	if err != nil {
+		er := errors.Wrap(err, "failed to increment total orders")
+		k.Logger.Error(er.Error())
+		return nil, er
+	}
+
+	k.Logger.Info("IncrementTotalOrders has successfully finished")
+	return &pb.Void{}, nil
+}
+
+func (k *KitchenService) UpdateRating(ctx context.Context, req *pb.Rating) (*pb.Void, error) {
+	k.Logger.Info("UpdateRating method is starting")
+
+	err := k.Repo.UpdateRating(ctx, req.Id, req.Rating)
+	if err != nil {
+		er := errors.Wrap(err, "failed to update rating")
+		k.Logger.Error(er.Error())
+		return nil, er
+	}
+
+	k.Logger.Info("UpdateRating has successfully finished")
+	return &pb.Void{}, nil
+}

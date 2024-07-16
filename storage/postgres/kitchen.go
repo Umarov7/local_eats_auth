@@ -282,3 +282,39 @@ func (k *KitchenRepo) ValidateKitchen(ctx context.Context, id string) (bool, err
 
 	return status, nil
 }
+
+func (k *KitchenRepo) IncrementTotalOrders(ctx context.Context, id string) error {
+	query := `
+	update
+		kitchens
+	set
+		total_orders = total_orders + 1
+	where
+		deleted_at is null and id = $1
+	`
+
+	_, err := k.DB.ExecContext(ctx, query, id)
+	if err != nil {
+		return errors.Wrap(err, "increment failure")
+	}
+
+	return nil
+}
+
+func (k *KitchenRepo) UpdateRating(ctx context.Context, id string, rating float32) error {
+	query := `
+	update
+		kitchens
+	set
+		rating = (rating + $1) / 2
+	where
+		deleted_at is null and id = $2
+	`
+
+	_, err := k.DB.ExecContext(ctx, query, rating, id)
+	if err != nil {
+		return errors.Wrap(err, "update failure")
+	}
+
+	return nil
+}
