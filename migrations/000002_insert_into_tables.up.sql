@@ -1,5 +1,6 @@
 INSERT INTO users (id, username, email, password_hash, full_name, user_type, address, phone_number, bio, specialties, years_of_experience, is_verified)
 VALUES
+('123e4567-e89b-12d3-a456-426614174000', 'pronium', 'azizbekqobulov05@gmail.com', 'hashed_password_0', 'Azizbek Qobulov', 'admin', 'Tashkent, Uzbekistan', '+1234567890', 'Administrator', '{Admin}', 0, true),
 ('123e4567-e89b-12d3-a456-426614174001', 'john_doe', 'john.doe@example.com', 'hashed_password_1', 'John Doe', 'chef', '123 Main St, Anytown, USA', '+1234567890', 'I am a chef specializing in Italian cuisine.', '{Italian, Pasta, Pizza}', 10, true),
 ('123e4567-e89b-12d3-a456-426614174002', 'jane_smith', 'jane.smith@example.com', 'hashed_password_2', 'Jane Smith', 'chef', '456 Elm St, Anytown, USA', '+1987654321', 'Passionate about baking and desserts.', '{Baking, Desserts, French}', 8, true),
 ('123e4567-e89b-12d3-a456-426614174003', 'chef_mike', 'mike@example.com', 'hashed_password_3', 'Mike Johnson', 'chef', '789 Oak St, Anytown, USA', '+1122334455', 'Specializing in seafood and Mediterranean dishes.', '{Seafood, Mediterranean}', 12, true),

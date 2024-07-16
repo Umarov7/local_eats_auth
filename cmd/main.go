@@ -1,9 +1,12 @@
 package main
 
 import (
+	"auth-service/api"
 	"auth-service/config"
+	pba "auth-service/genproto/auth"
 	pbk "auth-service/genproto/kitchen"
 	pbu "auth-service/genproto/user"
+	"auth-service/pkg"
 	"auth-service/service"
 	"auth-service/storage/postgres"
 	"log"
@@ -29,12 +32,19 @@ func main() {
 
 	userService := service.NewUserService(db)
 	kitchenService := service.NewKitchenService(db)
+	authService := service.NewAuthService(db)
+	authClient := pkg.CreateAuthClient(cfg)
+
+	router := api.Router(authClient)
+	log.Printf("Auth api is running at localhost%v", cfg.HTTP_PORT)
+	go router.Run(cfg.HTTP_PORT)
 
 	server := grpc.NewServer()
 	pbu.RegisterUserServer(server, userService)
 	pbk.RegisterKitchenServer(server, kitchenService)
+	pba.RegisterAuthServer(server, authService)
 
-	log.Printf("server listening at %v", lis.Addr())
+	log.Printf("Auth server is listening at %v", lis.Addr())
 	err = server.Serve(lis)
 	if err != nil {
 		log.Fatalf("error while serving: %v", err)

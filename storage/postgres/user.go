@@ -202,3 +202,67 @@ func (u *UserRepo) ValidateUser(ctx context.Context, id string) (bool, error) {
 
 	return status, nil
 }
+
+func (u *UserRepo) GetUserByID(ctx context.Context, id string) (string, string, string, error) {
+	query := `
+	select
+		username, email, password_hash
+	from
+		users
+	where
+		deleted_at is null and id = $1
+	`
+
+	var username, email, passwordHash string
+	err := u.DB.QueryRowContext(ctx, query, id).Scan(&username, &email, &passwordHash)
+	if err != nil {
+		return "", "", "", errors.Wrap(err, "reading failure")
+	}
+
+	return id, username, passwordHash, nil
+}
+
+func (u *UserRepo) GetUserByEmail(ctx context.Context, email string) (string, string, string, error) {
+	query := `
+	select
+		id, username, password_hash
+	from
+		users
+	where
+		deleted_at is null and email = $1
+	`
+
+	var id, username, passwordHash string
+	err := u.DB.QueryRowContext(ctx, query, email).Scan(&id, &username, &passwordHash)
+	if err != nil {
+		return "", "", "", errors.Wrap(err, "reading failure")
+	}
+
+	return id, username, passwordHash, nil
+}
+
+func (u *UserRepo) UpdatePassword(ctx context.Context, id string, passwordHash string) error {
+	query := `
+	update
+		users
+	set
+		password_hash = $1, updated_at = NOW()
+	where
+		deleted_at is null and id = $2
+	`
+
+	res, err := u.DB.ExecContext(ctx, query, passwordHash, id)
+	if err != nil {
+		return errors.Wrap(err, "password update failure")
+	}
+
+	rowsNum, err := res.RowsAffected()
+	if err != nil {
+		return errors.Wrap(err, "rows affected failure")
+	}
+	if rowsNum < 1 {
+		return errors.Wrap(err, "no rows affected")
+	}
+
+	return nil
+}
