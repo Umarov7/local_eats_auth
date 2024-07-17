@@ -318,3 +318,39 @@ func (k *KitchenRepo) UpdateRating(ctx context.Context, id string, rating float3
 
 	return nil
 }
+
+func (k *KitchenRepo) UpdateRevenue(ctx context.Context, id string, revenue float32) error {
+	query := `
+	update
+		kitchens
+	set
+		revenue = revenue + $1
+	where
+		deleted_at is null and id = $2
+	`
+
+	_, err := k.DB.ExecContext(ctx, query, revenue, id)
+	if err != nil {
+		return errors.Wrap(err, "revenue update failure")
+	}
+
+	return nil
+}
+
+func (k *KitchenRepo) GetName(ctx context.Context, id string) (string, error) {
+	query := `
+	select
+		name
+	from
+		kitchens
+	where deleted_at is null and id = $1
+	`
+
+	var name string
+	err := k.DB.QueryRowContext(ctx, query, id).Scan(&name)
+	if err != nil {
+		return "", errors.Wrap(err, "name retrieval failure")
+	}
+
+	return name, nil
+}

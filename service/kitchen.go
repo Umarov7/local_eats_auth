@@ -159,3 +159,31 @@ func (k *KitchenService) UpdateRating(ctx context.Context, req *pb.Rating) (*pb.
 	k.Logger.Info("UpdateRating has successfully finished")
 	return &pb.Void{}, nil
 }
+
+func (k *KitchenService) UpdateRevenue(ctx context.Context, req *pb.Revenue) (*pb.Void, error) {
+	k.Logger.Info("UpdateRevenue method is starting")
+
+	err := k.Repo.UpdateRevenue(ctx, req.Id, req.Revenue)
+	if err != nil {
+		er := errors.Wrap(err, "failed to update revenue")
+		k.Logger.Error(er.Error())
+		return nil, er
+	}
+
+	k.Logger.Info("UpdateRevenue has successfully finished")
+	return &pb.Void{}, nil
+}
+
+func (k *KitchenService) GetName(ctx context.Context, req *pb.ID) (*pb.Name, error) {
+	k.Logger.Info("GetName method is starting")
+
+	name, err := k.Repo.GetName(ctx, req.Id)
+	if err != nil {
+		er := errors.Wrap(err, "failed to get name")
+		k.Logger.Error(er.Error())
+		return nil, er
+	}
+
+	k.Logger.Info("GetName has successfully finished")
+	return &pb.Name{Name: name}, nil
+}

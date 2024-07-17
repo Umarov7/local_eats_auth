@@ -26,6 +26,7 @@ CREATE TABLE kitchens (
     phone_number VARCHAR(20),
     rating DECIMAL(3, 2) DEFAULT 0,
     total_orders INTEGER DEFAULT 0,
+    total_revenue FLOAT DEFAULT 0,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP WITH TIME ZONE

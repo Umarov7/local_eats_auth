@@ -1,6 +1,5 @@
 package postgres
 
-/*
 import (
 	"auth-service/config"
 	pba "auth-service/genproto/auth"
@@ -12,19 +11,12 @@ import (
 )
 
 var (
-	mockConfig = &config.Config{
-		DB_HOST:     "localhost",
-		DB_PORT:     "5432",
-		DB_USER:     "postgres",
-		DB_NAME:     "local_eats_auth",
-		DB_PASSWORD: "root",
-	}
 	mockUser        = &pba.RegisterResponse{}
 	mockUserProfile = &pbu.Profile{}
 )
 
 func userDB() *UserRepo {
-	db, err := ConnectDB(mockConfig)
+	db, err := ConnectDB(config.Load())
 	if err != nil {
 		log.Fatal("could not connect to postgres")
 	}
@@ -132,4 +124,3 @@ func TestDelete(t *testing.T) {
 	}
 
 }
-*/
