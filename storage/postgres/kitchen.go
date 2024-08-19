@@ -324,7 +324,7 @@ func (k *KitchenRepo) UpdateRevenue(ctx context.Context, id string, revenue floa
 	update
 		kitchens
 	set
-		revenue = revenue + $1
+		total_revenue = total_revenue + $1
 	where
 		deleted_at is null and id = $2
 	`
