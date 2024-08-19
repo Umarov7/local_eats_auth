@@ -2,6 +2,7 @@ package service
 
 import (
 	"auth-service/api/token"
+	"auth-service/config"
 	pb "auth-service/genproto/auth"
 	"auth-service/pkg/logger"
 	"auth-service/storage/postgres"
@@ -18,12 +19,14 @@ import (
 type AuthService struct {
 	pb.UnimplementedAuthServer
 	Repo   *postgres.UserRepo
+	Config *config.Config
 	Logger *slog.Logger
 }
 
-func NewAuthService(db *sql.DB) *AuthService {
+func NewAuthService(db *sql.DB, cfg *config.Config) *AuthService {
 	return &AuthService{
 		Repo:   postgres.NewUserRepo(db),
+		Config: cfg,
 		Logger: logger.NewLogger(),
 	}
 }
@@ -152,7 +155,7 @@ func (s *AuthService) ForgotPassword(ctx context.Context, req *pb.ResetRequest) 
 		return nil, er
 	}
 
-	err = SendCode(req.Email, code)
+	err = SendCode(s.Config, req.Email, code)
 	if err != nil {
 		er := errors.Wrap(err, "failed to send code")
 		s.Logger.Error(er.Error())

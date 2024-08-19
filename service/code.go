@@ -9,8 +9,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-func SendCode(email string, code string) error {
-	cfg := config.Load()
+func SendCode(cfg *config.Config, email string, code string) error {
 	// sender data
 	from := cfg.EMAIL
 	password := cfg.APP_KEY

@@ -32,7 +32,7 @@ func main() {
 
 	userService := service.NewUserService(db)
 	kitchenService := service.NewKitchenService(db)
-	authService := service.NewAuthService(db)
+	authService := service.NewAuthService(db, cfg)
 	authClient := pkg.CreateAuthClient(cfg)
 
 	router := api.Router(authClient)

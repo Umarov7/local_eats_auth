@@ -16,7 +16,13 @@ var (
 )
 
 func userDB() *UserRepo {
-	db, err := ConnectDB(config.Load())
+	db, err := ConnectDB(&config.Config{
+		DB_HOST:     "localhost",
+		DB_PORT:     "5432",
+		DB_USER:     "postgres",
+		DB_NAME:     "local_eats_auth",
+		DB_PASSWORD: "root",
+	})
 	if err != nil {
 		log.Fatal("could not connect to postgres")
 	}
