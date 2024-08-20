@@ -11,7 +11,7 @@ import (
 
 func ConnectDB() *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
+		Addr:     "redis:6379",
 		Password: "",
 		DB:       0,
 	})

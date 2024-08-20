@@ -36,7 +36,7 @@ func main() {
 	authClient := pkg.CreateAuthClient(cfg)
 
 	router := api.Router(authClient)
-	log.Printf("Auth api is running at localhost%v", cfg.HTTP_PORT)
+	log.Printf("Auth api is running on port %v", cfg.HTTP_PORT)
 	go router.Run(cfg.HTTP_PORT)
 
 	server := grpc.NewServer()
