@@ -26,8 +26,8 @@ func Load() *Config {
 	}
 
 	return &Config{
-		HTTP_PORT:   cast.ToString(coalesce("HTTP_PORT", ":8081")),
-		AUTH_PORT:   cast.ToString(coalesce("AUTH_PORT", ":50051")),
+		HTTP_PORT:   cast.ToString(coalesce("HTTP_PORT", "auth-service:8081")),
+		AUTH_PORT:   cast.ToString(coalesce("AUTH_PORT", "auth-service:50051")),
 		DB_HOST:     cast.ToString(coalesce("DB_HOST", "postgres1")),
 		DB_PORT:     cast.ToString(coalesce("DB_PORT", "5432")),
 		DB_USER:     cast.ToString(coalesce("DB_USER", "postgres")),
